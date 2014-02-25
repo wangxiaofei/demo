@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-<!-- Properties文件读取配置，base的properties -->
+	<!-- Properties文件读取配置，base的properties -->
     <context:property-placeholder location="classpath:jdbc.properties" />
 
     <!-- JNDI获取数据源(使用BoneCP连接池) -->

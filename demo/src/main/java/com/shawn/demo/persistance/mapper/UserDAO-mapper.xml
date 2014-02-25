@@ -4,139 +4,118 @@
 
 <mapper namespace="com.shawn.demo.persistance.UserDAO">
 
-    <select
-        id="getRoleByUserID"
-        resultType="java.lang.String">
+	<select id="getRoleByUserID" resultType="java.lang.String">
         <![CDATA[  
             SELECT role FROM User WHERE userId = #{userId} AND isDeleted = 0 LIMIT 1
         ]]>
-    </select>
+	</select>
 
-    <select
-        id="getUserByUserNameAndPassword"
-        resultType="com.shawn.demo.business.model.User">
+	<select id="getUserByUserNameAndPassword" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE userName = #{userName} COLLATE utf8_bin AND password = #{password} COLLATE utf8_bin AND isDeleted = 0 LIMIT 1
         ]]>
-    </select>
-    
-    <select
-        id="getUserByName"
-        resultType="com.shawn.demo.business.model.User">
+	</select>
+
+	<select id="getUserByName" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE loginName = #{loginName} COLLATE utf8_bin AND isDeleted = 0 limit 1
         ]]>
-    </select>
-    
-    <select
-        id="getUserByLoginName"
-        resultType="com.shawn.demo.business.model.User">
+	</select>
+
+	<select id="getUserByLoginName" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE loginName = #{loginName} COLLATE utf8_bin AND isDeleted = 0 limit 1
         ]]>
-    </select>
-    
-    <select
-        id="getUserByNameIgnoreIsdeleted"
-        resultType="com.shawn.demo.business.model.User">
+	</select>
+
+	<select id="getUserByNameIgnoreIsdeleted" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE userName = #{userName} COLLATE utf8_bin limit 1
         ]]>
-    </select>
-    
-    <sql id="paged">
-        <if test="firstResult !=null">
-            <if test="maxResult !=null">
-                limit #{firstResult},#{maxResult}
-            </if>
-        </if>
-    </sql>
-    
-    <!-- 用户列表 -->
-    <select
-        id="getUserList"
-        parameterType="Map"
-        resultType="com.shawn.demo.business.model.User">
-        select U.* from User U 
-            where U.isDeleted = 0
-            <if test="searchTxt != null">
-               AND (U.loginName like #{searchTxt} OR U.userName like #{keyword})
-            </if>
-            order by userId desc
-         
-        <include refid="paged"/>
-    </select>
-    <select
-        id="getUserListCount"
-        parameterType="Map"
-        resultType="int">
-        SELECT count(*) FROM User 
-        	where isDeleted = 0
-            <if test="searchTxt != null">
-            	AND (loginName like #{searchTxt} OR userName like #{searchTxt})
-            </if>
-    </select>
+	</select>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="userId" parameterType="com.shawn.demo.business.model.User">
-        INSERT INTO User (loginName,userName,password,email,auth,telephone,isDeleted)
-        	values(#{loginName},#{userName},#{password},#{email},#{auth},#{telephone},'0')
-    </insert>
+	<sql id="paged">
+		<if test="firstResult !=null">
+			<if test="maxResult !=null">
+				limit #{firstResult},#{maxResult}
+			</if>
+		</if>
+	</sql>
 
-    <select
-        id="getUserById"
-        resultType="com.shawn.demo.business.model.User">
+	<!-- 用户列表 -->
+	<select id="getUserList" parameterType="Map"
+		resultType="com.shawn.demo.business.model.User">
+		select U.* from User U
+		where U.isDeleted = 0
+		<if test="searchTxt != null">
+			AND (U.loginName like #{searchTxt} OR U.userName like #{keyword})
+		</if>
+		order by userId desc
+
+		<include refid="paged" />
+	</select>
+	<select id="getUserListCount" parameterType="Map" resultType="int">
+		SELECT count(*) FROM User
+		where isDeleted = 0
+		<if test="searchTxt != null">
+			AND (loginName like #{searchTxt} OR userName like #{searchTxt})
+		</if>
+	</select>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="userId"
+		parameterType="com.shawn.demo.business.model.User">
+		INSERT INTO User
+		(loginName,userName,password,email,auth,telephone,isDeleted)
+		values(#{loginName},#{userName},#{password},#{email},#{auth},#{telephone},'0')
+	</insert>
+
+	<select id="getUserById" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE userId = #{userId} AND isDeleted = 0 LIMIT 1
         ]]>
-    </select>
+	</select>
 
-    <update id="update" parameterType="com.shawn.demo.business.model.User">
+	<update id="update" parameterType="com.shawn.demo.business.model.User">
         <![CDATA[  
             Update User set userName=#{userName},password=#{password},email=#{email},
             auth=#{auth},telephone=#{telephone} WHERE userId = #{userId}
         ]]>
-    </update>
-    
-    <update id="delete">
+	</update>
+
+	<update id="delete">
         <![CDATA[  
             Update User set isDeleted=1 WHERE userId = #{userId}
         ]]>
-    </update>
-    
-    <select
-        id="getUsedTaskCountByUserId"
-        resultType="int">
+	</update>
+
+	<select id="getUsedTaskCountByUserId" resultType="int">
         <![CDATA[
             SELECT COUNT(taskId) From Task WHERE createUserId = #{userId} AND taskStatusId>=4
         ]]>
-    </select>
-    
-    <update id="modifyInfo">
+	</select>
+
+	<update id="modifyInfo">
             <![CDATA[  
                 Update User set email=#{email}, telephone = #{telephone} , description = #{description} WHERE userId = #{userId}
             ]]>
-    </update>
-    
-    <update id="modifyPassword">
+	</update>
+
+	<update id="modifyPassword">
             <![CDATA[  
                 Update User set password=#{password} WHERE userId = #{userId}
             ]]>
-    </update>
-    
-    <select
-        id="getUserListByRole"
-        resultType="com.shawn.demo.business.model.User">
+	</update>
+
+	<select id="getUserListByRole" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE role=#{role} and isdeleted=0 ORDER BY userName
         ]]>
-    </select>
-    
-    <select
-        id="getAllUserList"
-        resultType="com.shawn.demo.business.model.User">
+	</select>
+
+	<select id="getAllUserList" resultType="com.shawn.demo.business.model.User">
         <![CDATA[  
             SELECT * FROM User WHERE isdeleted=0 ORDER BY userName
         ]]>
-    </select>
-    
+	</select>
+
 </mapper>

@@ -124,7 +124,7 @@ public class UserController {
      * @param loginName
      * @return
      */
-    @RequestMapping(value="checkLoginName")
+    @RequestMapping(value="/checkLoginName")
     public @ResponseBody boolean checkLoginName(String loginName){
         return userService.checkLoginNameExists(loginName);
     }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.shawn.demo.business.model.User;
 
-public interface UserDAO {
+public interface UserDAO{
     /**
      * 获得用户列表，可以分页
      * 
@@ -59,11 +59,7 @@ public interface UserDAO {
      */
     public User getUserById(Integer userId);
 
-    /**
-     * update
-     * @param user
-     */
-    public void update(User user);
+
 
     /**
      * delete
@@ -103,6 +99,8 @@ public interface UserDAO {
      * @return
      */
     public List<User> getAllUserList();
+
+	public void update(User user);
 
     /**
      * 获取用户 忽视 isdeleted
