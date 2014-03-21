@@ -1,6 +1,7 @@
 package demo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
@@ -18,11 +19,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.shawn.demo.business.utils.DateFormat;
+
 public class Test {
 
 	private static String sid = "831cc356921e4bb9ac1f15aca61f58d7";
 
-	private static String domain = "http://localhost:8080/rad";
+	private static String domain = "http://192.168.1.10:8080/rad";
 
 	private Logger logger = Logger.getLogger(Test.class);
 
@@ -548,8 +551,8 @@ public class Test {
 		// test.testGetRequestInfo();
 		// test.testGetTalkRequestInfo();
 //		test.testGetFriendList();
-		test.testGetFriendApplyList();
-		test.testGetFriendAuthList();
+//		test.testGetFriendApplyList();
+//		test.testGetFriendAuthList();
 //		test.testAddFriend();
 //		test.testAuthFriend();
 //		test.testDelFriend();

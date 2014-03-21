@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 /**
  * 有关日期与字符串之间转换的工具类
- * @author 霍战锋
+ * @author 
  *
  */
 public class DateFormat {

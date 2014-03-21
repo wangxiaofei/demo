@@ -161,4 +161,9 @@ public class UserController {
         return true;
     }
     
+    @RequestMapping(value="test")
+    public String jumpTestWebsocket(){
+    	return "testWebSocket";
+    }
+    
 }
