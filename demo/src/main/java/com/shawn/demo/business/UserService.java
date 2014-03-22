@@ -33,6 +33,10 @@ public interface UserService {
      * @param user
      */
     public void add(User user);
+    
+    public void addUserList(List<User> userList) throws Exception;
+    
+    public void addUserArray(User[] userArray) throws Exception;
 
     /**
      * get user by Id

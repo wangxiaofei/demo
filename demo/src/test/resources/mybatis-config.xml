@@ -11,8 +11,10 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.shawn.demo.business.model.User" alias="User" />
+		<typeAlias type="com.shawn.demo.business.model.Test" alias="Test" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/shawn/demo/persistance/mapper/UserDAO-mapper.xml" />
+		<mapper resource="com/shawn/demo/persistance/mapper/TestDAO-mapper.xml" />
 	</mappers>
 </configuration>

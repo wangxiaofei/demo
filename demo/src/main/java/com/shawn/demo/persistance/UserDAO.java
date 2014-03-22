@@ -51,6 +51,10 @@ public interface UserDAO{
      * @param user
      */
     public void save(User user);
+    
+    public void saveList(List<User> userList);
+    
+    public void saveArray(User[] userArray);
 
     /**
      * get  user by id

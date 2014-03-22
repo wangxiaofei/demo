@@ -30,7 +30,7 @@ public class User implements Serializable {
 
     private String description;
 
-    private int isDeleted;
+    private Integer isDeleted;
 
     private Integer taskCount;
 
