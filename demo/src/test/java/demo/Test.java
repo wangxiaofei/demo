@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class Test {
 
-	private static String sid = "e2a0129be2b14a828d8153c88460d81e";
+	private static String sid = "11b9617bac1f49c7918d9a516f88ba41";
 
 	private static String domain = "http://localhost:8080/rad";
 
@@ -52,8 +52,8 @@ public class Test {
 		JSONObject obj = new JSONObject();
 		String param = null;
 		try {
-			obj.put("username", "wangxiaofei");
-			String passwd = "123";
+			obj.put("username", "wxf.ins");
+			String passwd = "123456";
 			passwd=DigestUtils.md5Hex(passwd);
 //			logger.info("password="+passwd);
 			obj.put("passwd", passwd);
@@ -132,7 +132,7 @@ public class Test {
 		String param = null;
 		try {
 			obj.put("sid", sid);
-			obj.put("userid", "101277");
+			obj.put("userid", "22");
 			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
 			logger.info(param);
 		} catch (JSONException e) {
@@ -1101,6 +1101,146 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
+	
+	public void testGetMessTypeAndCount(){
+		String url = domain + "/mess/getmesstypeandcount";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			obj.put("status", "0,1");			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testGetApproveInfoByUser(){
+		String url = domain + "/approve/getapproveinfobyuser";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			obj.put("userid", "1");			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testGetNoReadCount(){
+		String url = domain + "/diag/getnoreadcount";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			obj.put("userid", "1");			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testGetNoProcessCount(){
+		String url = domain + "/diag/getnoprocesscount";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			obj.put("userid", "1");			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testSetReaded(){
+		String url = domain + "/diag/setreaded";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			obj.put("requestid", "1009");			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testQueryUser(){
+		String url = domain + "/user/queryuser";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			obj.put("name", "王");	
+			obj.put("page", "1");
+			obj.put("count", "100");
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		Test test = new Test();
@@ -1145,7 +1285,14 @@ public class Test {
 //		for(int i =0;i< 1000;i++){
 //			test.testBugReport();
 //		}
-		test.testCreateFeedBack();
+//		test.testCreateFeedBack();
+//		 test.testGetMessTypeAndCount();
+//		 test.testGetApproveInfoByUser();
+//		test.testGetNoReadCount();
+//		test.testGetNoProcessCount();
+//		test.testSetReaded();
+		test.testQueryUser();
+		test.testGetUser();
 		
 	}
 }
