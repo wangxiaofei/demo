@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class Test {
 
-	private static String sid = "11b9617bac1f49c7918d9a516f88ba41";
+	private static String sid = "4d411202eea24ae2bd186a207295fd7c";
 
 	private static String domain = "http://localhost:8080/rad";
 
@@ -52,11 +52,12 @@ public class Test {
 		JSONObject obj = new JSONObject();
 		String param = null;
 		try {
-			obj.put("username", "wxf.ins");
+			obj.put("username", "wxf");
 			String passwd = "123456";
 			passwd=DigestUtils.md5Hex(passwd);
 //			logger.info("password="+passwd);
 			obj.put("passwd", passwd);
+			obj.put("appid", "website");
 			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
 			logger.info(param);
 		} catch (JSONException e) {
@@ -1241,6 +1242,27 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
+	public void testGetRecommendUser(){
+		String url = domain + "/user/getrecommendlist";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("sid", sid);
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		Test test = new Test();
@@ -1291,8 +1313,8 @@ public class Test {
 //		test.testGetNoReadCount();
 //		test.testGetNoProcessCount();
 //		test.testSetReaded();
-		test.testQueryUser();
-		test.testGetUser();
-		
+//		test.testQueryUser();
+//		test.testGetUser();
+		test.testGetRecommendUser();
 	}
 }
