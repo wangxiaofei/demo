@@ -23,7 +23,7 @@ public class Test {
 
 	private static String sid = "4d411202eea24ae2bd186a207295fd7c";
 
-	private static String domain = "http://localhost:8080/rad";
+	private static String domain = "http://localhost:8080/admin";
 
 	private Logger logger = Logger.getLogger(Test.class);
 
@@ -1263,9 +1263,61 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
+	
+	public void testLogSoftwareActive(){
+		String url = domain + "/app/statistics/active";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			//obj.put("userid", "111111");
+			obj.put("version", "3.0");
+			obj.put("channel", "1001");
+			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testGetQutoa(){
+		String url = domain + "/statistics/overview/quota";
+		String param = null;
+		JSONObject obj = new JSONObject();
+		try {
+			//obj.put("userid", "111111");
+			obj.put("quota", "download_count");
+			//obj.put("channel", "1001");
+			
+			logger.info("JSON : " + obj.toString());
+			param = new String(Base64.encodeBase64(obj.toString().getBytes()));
+			logger.info("BASE64 : " + param);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// 构造post参数
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("params", param));
+		try {
+			post(url, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		Test test = new Test();
+		test.testGetQutoa();
+//		test.testLogSoftwareActive();
 //		 test.testLogin();
 		// test.testCreateReportRequest();
 		// test.testCreateTalkRequest();
@@ -1315,6 +1367,6 @@ public class Test {
 //		test.testSetReaded();
 //		test.testQueryUser();
 //		test.testGetUser();
-		test.testGetRecommendUser();
+//		test.testGetRecommendUser();
 	}
 }
